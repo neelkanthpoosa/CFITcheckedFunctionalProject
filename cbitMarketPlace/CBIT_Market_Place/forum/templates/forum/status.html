@@ -1,0 +1,153 @@
+{%extends 'base.html'%}
+{%block head%}
+{%endblock%}
+
+{%block body%}
+<link href="https://fonts.googleapis.com/css?family=Libre+Barcode+128+Text|Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Bangers|Bowlby+One+SC" rel="stylesheet">
+<style media="screen">
+  body,html{
+    background-image: url("http://www.androidguys.com/wp-content/uploads/2015/12/forest-patrol.jpg");
+  }
+</style>
+<div class="container">
+
+
+  <div class="jumbotron" style="background-color:WHITE;">
+    <h1 class="display-4" style="font-family: 'Lobster', cursive;">Selling and Renting.</h1>
+    <p class="lead">
+
+      <p>Donors out there,are ready to help you.You can help others as well.</p>
+
+    </p>
+    <hr class="my-4">
+    <form method="post" style="padding-top:1rem">
+    {%csrf_token%}
+    <h4 style="font-family: 'Bowlby One SC', cursive;"> Item:  {{form.item}}</h4>
+    <br>
+    <h4 style="font-family: 'Bowlby One SC', cursive;"> Status:   {{form1.status}}</h4>
+    <br><br>
+    <button class="btn" type="submit" style="background-color:#C70039;color:white;border-color:transparent;margin-bottom:1rem">SUBMIT</button>
+  </form>
+    <br>
+
+
+  </div>
+
+
+
+</div>
+
+<div class="container" style="background-color:transparent">
+  <div class="row">
+
+
+
+{% for neel in item %}
+<div class="col">
+
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    {% if neel.user.userprofile.image %}
+      <img class="uk-border-circle" width="60" height="40" style="float:left" src="{{ neel.user.userprofile.image.url }}">
+      {% else %}
+      <img class="uk-border-circle" width="60" height="40" src="http://profilepicturesdp.com/wp-content/uploads/2018/06/default-facebook-dp-9.jpg">
+      {% endif %}
+    <h5 class="card-title" style="font-family: 'Lobster', cursive;">{{neel.user.first_name}} {{neel.user.last_name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{neel.created_date}}</h6>
+
+<p class="card-text">Item:{{neel.item}}</p>
+    {% for neelp in stat %}
+    {% if forloop.first %}
+
+
+    <p class="card-text">Status:{{neelp.status}}</p>
+    {% endif %}
+
+        {% endfor %}
+      <p class="card-text">Phone:{{neel.user.userprofile.phone}}</p>
+      <p class="card-text">Email:{{neel.user.email}}</p>
+  </div>
+</div>
+<br>
+</div>
+
+  <!-- <div class="uk-card uk-card-default uk-width-1-2@m" width="50" height="70">
+    <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+              {% if neel.user.userprofile.image %}
+                <img class="uk-border-circle" width="60" height="40" src="{{ neel.user.userprofile.image.url }}">
+                {% else %}
+                <img class="uk-border-circle" width="60" height="40" src="http://www.guardian.co.tt/sites/default/files/field/image/fb%20death.png">
+                {% endif %}
+            </div>
+            <div class="uk-width-expand">
+                <h3 class="uk-card-title uk-margin-remove-bottom"> {{neel.user.first_name}} {{neel.user.last_name}}</h3>
+                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00"> {{neel.created_date}} </time></p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-card-body">
+        Apron:{{neel.apron}}<br><br>
+
+        {% for neelp in stat1 %}
+        {% if forloop.first %}
+        Drafter:{{neelp.drafter}}<br><br>
+{% endif %}
+
+        {% endfor %}
+
+        Phone:{{neel.user.userprofile.phone}}<br><br>
+        Email:{{neel.user.email}}
+    </div>
+
+</div><br> -->
+
+
+  {% endfor %}
+  </div>
+</div>
+{%endblock%}
+
+
+<!-- <div class="container" style="background-color:transparent">
+
+{% for neel in stat %}
+
+  <div class="uk-card uk-card-default uk-width-1-2@m" width="50" height="70">
+    <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <div class="uk-width-auto">
+              {% if neel.user.userprofile.image %}
+                <img class="uk-border-circle" width="60" height="40" src="{{ neel.user.userprofile.image.url }}">
+                {% else %}
+                <img class="uk-border-circle" width="60" height="40" src="http://www.guardian.co.tt/sites/default/files/field/image/fb%20death.png">
+                {% endif %}
+            </div>
+            <div class="uk-width-expand">
+                <h3 class="uk-card-title uk-margin-remove-bottom"> {{neel.user.first_name}} {{neel.user.last_name}}</h3>
+                <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00"> {{neel.created_date}} </time></p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-card-body">
+        Apron:{{neel.apron}}<br><br>
+
+        {% for neelp in stat1 %}
+        {% if forloop.first %}
+        Drafter:{{neelp.drafter}}<br><br>
+{% endif %}
+
+        {% endfor %}
+
+        Phone:{{neel.user.userprofile.phone}}<br><br>
+        Email:{{neel.user.email}}
+    </div>
+
+</div><br>
+
+
+  {% endfor %}
+</div> -->

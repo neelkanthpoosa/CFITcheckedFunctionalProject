@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+
+
+
+
+
+{% block body %}
+{% load static %}
+<style media="screen">
+  body,html{
+    background-image: url("http://www.androidguys.com/wp-content/uploads/2015/12/forest-patrol.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: static;
+  }
+</style>
+<div class="container">
+<!-- <h1>Forum WORKING</h1> -->
+<!-- <style media="screen">
+  .xxx{
+    background-image: url("https://png.pngtree.com/element_pic/16/10/21/6ce7f06d71aa48b4ad1bc4456e4eb42a.jpg");
+  }
+</style> -->
+<div class="xxx">
+<div class="jumbotron" style="background-color:black;color:white;padding-bottom:1rem;opacity:0.8">
+  <h1 class="display-4" style="color:white">Forum</h1>
+  <p class="lead">Forum for sellers to display.</p>
+  <p>Give your goods,books and other prescribed stuff for rental.Or sell them.  </p>
+  <p>Show your stuff here with your fancy description</p>
+  <hr class="my-4">
+
+
+  <form method="post" enctype="multipart/form-data" style="padding-bottom:0px">
+  {% csrf_token %}
+  {{form.post}}
+  <br>
+  {{form.image}}
+  <br>
+  <br>
+  <button class="btn" type="submit" style="background-color:#C70039;color:white;border-color:transparent;margin-bottom:1rem">SUBMIT</button>
+  </form>
+</div>
+</div>
+
+
+<br>
+<br>
+<h2>{{ text }}</h2>
+<div class="row">
+{% for post in posts %}
+<div class="col">
+<div class="card" style="width: 18rem;">
+  {% if post.image %}
+<img class="card-img-top" src="{{post.image.url}}" alt="Card image cap" style="height:30%">
+{% endif %}
+  <div class="card-body" >
+    <h5 class="card-title">{{ post.post }}</h5>
+    <p class="card-text">Posted by <b>{{ post.user.get_full_name }}</b> on {{ post.created }}</p>
+
+    <!-- <p class="card-text"><h6>Contact:{{ post.user.email }}<br>{{ post.user.userprofile.phone }}</h6></p> -->
+
+
+    {% if post.user.userprofile.image %}
+      <img class="uk-border-circle" width="60" height="40" src="{{ post.user.userprofile.image.url }}">
+      {% else %}
+      <img class="uk-border-circle" width="60" height="40" src="http://profilepicturesdp.com/wp-content/uploads/2018/06/default-facebook-dp-9.jpg">
+      {% endif %}
+
+  </div>
+</div>
+<br>
+</div>
+{% endfor %}
+</div>
+
+</div>
+<!-- <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div> -->
+{% endblock %}
